@@ -10,3 +10,6 @@ Il lui sera aussi possible de recevoir des notifications, de se constituer une l
 ### Use Case
 
 ![Use Case](/avant%20projet/UseCaseDiagram.jpg "Use case")
+
+### Maquettes
+![Maquette Vue PC](/avant%20projet/maquette%201.jpg "Maquette Vue PC")
