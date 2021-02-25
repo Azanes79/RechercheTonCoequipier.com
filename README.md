@@ -7,6 +7,6 @@ Il lui sera aussi possible de recevoir des notifications, de se constituer une l
   
 ## Avant Projet
 
-### Use Cases
+### Use Case
 
-[link](https://www.example.com/my%20great%20page)
+![Use Case](/avant%20projet/UseCaseDiagram.jpg "Use case")
