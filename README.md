@@ -12,4 +12,8 @@ Il lui sera aussi possible de recevoir des notifications, de se constituer une l
 ![Use Case](/avant%20projet/UseCaseDiagram.jpg "Use case")
 
 ### Maquettes
-![Maquette Vue PC](/avant%20projet/maquette%201.jpg "Maquette Vue PC")
+![Maquette Home PC](/avant%20projet/Home.png "Maquette Vue PC")
+
+![Maquette Home Mobile](/avant%20projet/Android%20-%201.png "Maquette Home Mobile")
+
+![Maquette Ami Mobile](/avant%20projet/Android%20-%202.png "Maquette Ami Mobile")
