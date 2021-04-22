@@ -1,0 +1,24 @@
+<app-navbar (navOutput)="snav.toggle()"></app-navbar>
+<mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav [mode]="'side'" style="width: 320px; padding-top: 64px;">
+        <app-menu-left></app-menu-left>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="container">
+            <app-menu-left class="menu-left-1024"></app-menu-left>
+            <div class="add-post">
+                <app-add-post></app-add-post>
+                <div class="app-suggestions">
+                    <app-suggestions></app-suggestions>
+                </div>
+                <div class="app-feed">
+                    <app-feed></app-feed>
+                </div>
+
+            </div>
+            <div class="app-suggestions-1024">
+                <app-suggestions></app-suggestions>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

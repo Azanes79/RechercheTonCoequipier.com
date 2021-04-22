@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Ton profil</mat-card-title>
+            
+        </mat-card-header>
+        <mat-card-content>
+            <div class="card-content">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Pseudo RTC.com</mat-label>
+                    <input matInput placeholder="Ton pseudo" type="text" minlength="2">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Description de ton profil</mat-label>
+                    <textarea matInput></textarea>
+                  </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Sauvegarder</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Tes autres pseudos</mat-card-title>
+            <button mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+        </mat-card-header>
+        <mat-card-content>
+            <div  *ngFor="let pseudoGame of pseudoGames">
+                <mat-divider></mat-divider>
+                <div class="content-pseudos">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Jeu</mat-label>
+                        <input matInput type="text" value="{{pseudoGame.game}}" readonly>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Pseudo</mat-label>
+                        <input matInput type="text" value="{{pseudoGame.pseudo}}" readonly>
+                    </mat-form-field>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Sauvegarder</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

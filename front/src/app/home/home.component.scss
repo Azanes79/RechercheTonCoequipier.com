@@ -1,0 +1,64 @@
+.container {
+    // display: grid;
+    // grid-template-columns: repeat(12, 1fr);
+    padding-top: 64px;
+}
+
+app-navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.menu-left-1024 {
+    display: none;
+}
+
+.app-suggestions {
+    padding-top: 64px;
+    display: block;
+}
+
+.app-suggestions-1024 {
+    display: none;
+}
+
+@media (min-width: 1280px) { 
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    .menu-left-1024 {
+        display: block;
+    }
+
+    .app-suggestions {
+        display: none;
+    }
+
+    .app-suggestions-1024 {
+        display: block;
+        margin-top: 50px;
+        grid-column: 10/12;
+    }
+}
+
+.example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+}
+
+@media (min-width: 425px) { 
+    .add-post {
+        grid-column: 4/8;
+        margin: 50px 10%;
+    }
+}
+
+.app-feed {
+    margin-top: 50px;
+}
+

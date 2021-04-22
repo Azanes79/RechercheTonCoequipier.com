@@ -1,0 +1,13 @@
+.suggess-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+mat-card {
+    border-radius: 15px;
+}
+
+p {
+    color: var(--primary-color);;
+}

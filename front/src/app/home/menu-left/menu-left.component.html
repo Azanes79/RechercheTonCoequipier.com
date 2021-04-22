@@ -1,0 +1,44 @@
+<div class="container">
+    <mat-tab-group>
+        <mat-tab label="Amis">
+            <div class="div-search">
+                <mat-form-field class="search" appearance="outline">
+                    <mat-label>Rechercher</mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+            <div>
+                <div *ngFor="let ami of amis">
+                    <mat-divider></mat-divider>
+                    <div class="cell-friend">
+                        <div class="friend-info">
+                            <mat-icon>sentiment_very_satisfied</mat-icon>
+                            <p>{{ami.username}}</p>
+                        </div>
+    
+                        <div class="friend-actions">
+                            <mat-icon>chat</mat-icon>
+                            <mat-icon>close</mat-icon>
+                        </div>
+    
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Notifications">
+            <div>
+                <div *ngFor="let notif of notifications">
+                    <mat-divider></mat-divider>
+                    <div class="cell-friend">
+                        <div class="friend-info">
+                            <p>{{notif.content}}</p>
+                        </div>    
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

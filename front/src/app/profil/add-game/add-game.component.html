@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Ajout d'un pseudo</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Jeu</mat-label>
+        <input matInput placeholder="League Of Legends" type="text" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option value="League Of Legends"> League Of Legends </mat-option>
+            <mat-option value="Rocket League"> Rocket League </mat-option>
+            <mat-option value="Valorant"> Valorant </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Pseudo</mat-label>
+        <input matInput placeholder="Ton pseudo" type="text">
+    </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="" color="primary" cdkFocusInitial>fermer</button>
+</div>

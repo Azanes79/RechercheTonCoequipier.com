@@ -1,0 +1,70 @@
+
+.container {
+    height: 100%;
+}
+.div-title {
+    grid-column: 1/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.div-login {
+    grid-column: 4/6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+mat-card-content {
+    display: grid;
+    margin-top: 16px;
+}
+
+mat-card {
+    display: grid;
+}
+
+mat-form-field {
+    width: 100%;
+}
+.title {
+    font-family: font-title;
+}
+
+
+
+@media (min-width: 420px) { 
+    .title {
+        font-size: 1em;
+    }
+    
+    .card {
+        width: 50%;
+    }
+}
+
+@media (min-width: 550px) {
+    .title {
+        font-size: 2em;
+    }
+    
+}
+
+@media (min-width: 1024px) { 
+    .container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        height: 100%;
+    }
+
+    
+}
+

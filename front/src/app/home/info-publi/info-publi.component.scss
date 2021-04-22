@@ -1,0 +1,18 @@
+.infos {
+    display: flex;
+    justify-content: space-between;
+    margin:0 10px
+}
+
+.fab {
+    display: flex;
+    align-items: center;
+
+    button {
+        margin: 0 5px;
+    }
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}

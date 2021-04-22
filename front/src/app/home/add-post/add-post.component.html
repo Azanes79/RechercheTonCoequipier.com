@@ -1,0 +1,43 @@
+<mat-card >
+    <mat-card-header>
+        <mat-card-title>
+            Nouvelle publication
+        </mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="outline" class="formfield-textarea">
+            <mat-label>Votre recherche</mat-label>
+            <textarea matInput placeholder="Saisissez l'intitulé de votre recherche" rows="5"></textarea>
+        </mat-form-field>
+
+        <div>
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Jeu</mat-label>
+                <input matInput placeholder="League Of Legends" type="text" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option value="League Of Legends"> League Of Legends </mat-option>
+                    <mat-option value="Rocket League"> Rocket League </mat-option>
+                    <mat-option value="Valorant"> Valorant </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Nb Joueurs</mat-label>
+                <input matInput type="number" placeholder="2">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Visibilité</mat-label>
+                <mat-select>
+                    <mat-option value="friends">Amis</mat-option>
+                    <mat-option value="all">Tous</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary">Publier</button>
+    </mat-card-actions>
+</mat-card>

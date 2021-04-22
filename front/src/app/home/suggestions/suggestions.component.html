@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Suggestions</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <div *ngFor="let sugges of suggestions">
+                <mat-divider></mat-divider>
+                    <div class="suggess-info">
+                        <p>{{sugges.game}}</p>
+                        <p>{{sugges.nbPublications}} demandes</p>
+                    </div>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

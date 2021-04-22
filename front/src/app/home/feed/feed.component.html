@@ -1,0 +1,84 @@
+<mat-card class="container">
+
+    <mat-card-header>
+        <mat-card-title>
+            Feed
+        </mat-card-title>
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Recherche</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </mat-card-header>
+
+    <mat-card-content style="margin-top: 10px;">
+        <div>
+            <mat-divider></mat-divider>
+            <div class="info-pub">
+                <div class="flex-between">
+                    <div class="flex-around gap-10">
+                        <mat-icon>sentiment_very_satisfied</mat-icon> Azanes
+                    </div>
+                    <div class="flex-around">
+                        <div class="info">
+                            <p>Jeu: <span>Cod Warzone</span></p>
+                        </div>
+                        <div class="info">
+                            <p>Nb Joueurs: <span>2</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p style="text-align: justify;">
+                        Je suis à la recherche de joueurs : go Top 1
+                    </p>
+                </div>
+                <div class="flex-around">
+                    <div class="gap-10">
+                        <mat-icon>thumb_up</mat-icon> 1
+                    </div>
+                    <div class="gap-10">
+                        <mat-icon>reply</mat-icon> 0
+                    </div>
+                    <div (click)="openDialog()">
+                        <mat-icon>info</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+        <div *ngFor="let pub of publications">
+            <mat-divider></mat-divider>
+            <div class="info-pub">
+                <div class="flex-between">
+                    <div class="flex-around gap-10">
+                        <mat-icon>sentiment_very_satisfied</mat-icon> {{pub.username}}
+                    </div>
+                    <div class="flex-around">
+                        <div class="info">
+                            <p>Jeu: <span>{{pub.game}}</span></p>
+                        </div>
+                        <div class="info">
+                            <p>Nb Joueurs: <span>{{pub.nbPlayer}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p style="text-align: justify;">
+                        {{pub.content}}
+                    </p>
+                </div>
+                <div class="flex-around">
+                    <div class="gap-10">
+                        <mat-icon>thumb_up</mat-icon> {{pub.likes}}
+                    </div>
+                    <div class="gap-10">
+                        <mat-icon>reply</mat-icon> {{pub.shares}}
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+    </mat-card-content>
+</mat-card>
