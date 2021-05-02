@@ -35,11 +35,12 @@ export class InfoPubliComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Vérifie si le like appartient à l'utilisateur (si oui on ne l'affiche pas)
   isUserLike(like: UserReact) {
     return this.post.user.FirebaseId === like.user.FirebaseId ? true : false;
   }
 
-
+  // envoie une demande accepté à l'utilisateur concerné
   async accept(like: UserReact) {
     const i = this.likes.findIndex(_like => _like.user.FirebaseId === like.user.FirebaseId);
     this.likes[i].state = 'accept';
@@ -60,6 +61,7 @@ export class InfoPubliComponent implements OnInit {
     })
   }
 
+  // refuse une demande
   denie(like: UserReact) {
     const i = this.likes.findIndex(_like => _like.user.FirebaseId === like.user.FirebaseId);
     this.likes[i].state = 'denie';
@@ -69,6 +71,7 @@ export class InfoPubliComponent implements OnInit {
     })
   }
 
+  // ajoute un utilisateur en ami
   addFriend(like:UserReact) {
     const friend: Friend = new Friend(this.post.user);
     like.user.friends.unshift(friend);
@@ -84,14 +87,17 @@ export class InfoPubliComponent implements OnInit {
     });
   }
 
+  // envoie une notification à socketIo
   public broadcastNotification(notif: Notifications): void {
     this.ioService.sendNotifLikeAccept(notif);
   }
 
+  // envoie une notification à socketIo
   public broadcastFriend(user: User): void {
     this.ioService.sendAcceptFriend(user);
   }
 
+  // vérifie si l'utilisateur est déjà dans nos ami (même si la demande d'ami n'est pas accepté)
   isAlreadyFriend(like: UserReact) {
     return like.user.friends.find(_friend => _friend.user.FirebaseId === this.post.user.FirebaseId) ? true : false;
   }

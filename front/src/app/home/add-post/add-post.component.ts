@@ -22,6 +22,7 @@ export class AddPostComponent implements OnInit {
   ngOnInit() {
   }
 
+  // création du formulaire
   createForm() {
     this.form = this.fb.group({
       content: new FormControl('', [Validators.required]),
@@ -31,6 +32,7 @@ export class AddPostComponent implements OnInit {
     })
   }
 
+  // ajoute une nouvelle publication
   addPost() {
     if(this.form.valid) {
       const post = new Post(this.authService.user, this.form.get('content').value, this.form.get('gameId').value, this.form.get('nbPlayers').value, this.form.get('visibility').value, new Date())
@@ -41,6 +43,7 @@ export class AddPostComponent implements OnInit {
     }
   }
 
+  // envoie une notification à socket.io
   public broadcastPost(post: Post): void {
     this.ioService.sendPostInformation(post);
   }

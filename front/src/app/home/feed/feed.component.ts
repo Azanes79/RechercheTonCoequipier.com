@@ -12,6 +12,8 @@ import { InfoPubliComponent } from '../info-publi/info-publi.component';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss']
 })
+
+// composant gérant l'affichage des publications
 export class FeedComponent implements OnInit {
 
 
@@ -28,6 +30,7 @@ export class FeedComponent implements OnInit {
   }
 
 
+  // ouvre la fenêtre de dialogue permettant de voir les informations de la publications (les likes)
   openDialog(post: Post): void {
     const dialogRef = this.dialog.open(InfoPubliComponent, {
       width: '320px',
@@ -39,7 +42,7 @@ export class FeedComponent implements OnInit {
     });
   }
 
-
+  // reception des event socketIo
   private subscribeToPosts(): void {
     this.ioService.getPost()
       .subscribe((data: { event: string, post: Post }) => {
@@ -64,7 +67,7 @@ export class FeedComponent implements OnInit {
       });
   }
 
-
+  // ajoute un like
   sendLike(post: Post) {
     if (post.likes.find(_e => _e.user.FirebaseId === this.authService.user.FirebaseId)) {
       post.likes = post.likes.filter(_e => _e.user.FirebaseId !== this.authService.user.FirebaseId)
@@ -77,7 +80,7 @@ export class FeedComponent implements OnInit {
     });
   }
 
-
+  //envoie un share
   sendShare(post: Post) {
     if (post.shares.find(_e => _e.user.FirebaseId === this.authService.user.FirebaseId)) {
       post.shares = post.shares.filter(_e => _e.user.FirebaseId !== this.authService.user.FirebaseId)
@@ -90,23 +93,26 @@ export class FeedComponent implements OnInit {
     });
   }
 
+  // envoie une notification à socketIo
   public broadcastShare(post: Post): void {
     this.ioService.sendShare(post);
   }
 
+  // envoie une notification à socketIo
   public broadcastLike(post: Post): void {
     this.ioService.sendLike(post);
   }
 
+  // vérifie si la publication a été liké par l'utilisateur connecté
   isLike(post: Post) {
     if (this.authService.user) {
       return post.likes.find(_data => _data.user.FirebaseId === this.authService.user.FirebaseId) ? true : false;
     } else {
       return false;
     }
-
   }
 
+   // vérifie si la publication a été partagé par l'utilisateur connecté
   isShare(post: Post) {
     if (this.authService.user) {
       return post.shares.find(_data => _data.user.FirebaseId === this.authService.user.FirebaseId) ? true : false;
@@ -115,6 +121,7 @@ export class FeedComponent implements OnInit {
     }
   }
 
+   // vérifie si la publication est celle de l'utilisateur
   isUserPost(post: Post) {
     if (this.authService.user) {
       return post.user.FirebaseId === this.authService.user.FirebaseId ? true : false;

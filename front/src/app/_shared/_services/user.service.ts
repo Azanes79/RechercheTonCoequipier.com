@@ -19,19 +19,23 @@ export class UserService {
     return options;
   }
 
+
+  // ajoute un utilisateur
   postUser(user: User) {
     return this.http.post(`${this.API}/users`, user, this.getOptions());
   }
 
+  // récupère un utilisateur
   getUser(firebaseId: string) {
     return this.http.get(`${this.API}/users/${firebaseId}`, this.getOptions());
   }
 
-
+  // récupère les données de l'utilisateur connecté
   getUserData() {
     return this.getUser(this.authService.userData.uid)
   }
 
+  // met à jour un utilisateur
   updateUser(user: User) {
     return this.http.put(`${this.API}/users/`, user, this.getOptions())
   }

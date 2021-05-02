@@ -18,14 +18,17 @@ export class NotificationService {
     return options;
   }
 
+  // Récupère les notifications d'un utilisateur
   getNotifications(firebaseId: string) {
     return this.httpClient.get<Array<Notifications>>(`${environment.api}/notifications/${firebaseId}`, this.getOptions())
   }
 
+  // ajoute une notification
   postNotification(notification: Notifications) {
     return this.httpClient.post<Notifications>(`${environment.api}/notifications/`, notification, this.getOptions())
   }
 
+  // met à jour une notification
   updateNotification(notification: Notifications) {
     return this.httpClient.put<Notifications>(`${environment.api}/notifications/`, notification, this.getOptions())
   }

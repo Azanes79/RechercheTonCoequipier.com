@@ -19,22 +19,27 @@ export class PreferencesGamesService {
     return options;
   }
 
+  // récupère les préférences d'un utilisateur
   getPreferencesOfUser(firebaseId: string) {
     return this.http.get<PreferencesGames[]>(`${this.API}/preferencesGames/${firebaseId}`, this.getOptions());
   }
 
+  // récupère une préférence d'un utilisateur
   getOnePreferencesOfUser(firebaseId: string, gameId:string) {
     return this.http.get<PreferencesGames[]>(`${this.API}/preferencesGames/${firebaseId}/${gameId}`, this.getOptions());
   }
 
+  // ajoute une préférence
   createPreference(pref: PreferencesGames) {
     return this.http.post(`${this.API}/preferencesGames`, pref, this.getOptions());
   }
 
+  // met à jour une préférence
   updatePreference(pref: PreferencesGames) {
     return this.http.put(`${this.API}/preferencesGames/`, pref, this.getOptions())
   }
 
+  // supprime une préférence
   deletePreference(pref: PreferencesGames) {
     return this.http.delete(`${this.API}/preferencesGames/${pref.userId}/${pref.gameId}`, this.getOptions())
   }

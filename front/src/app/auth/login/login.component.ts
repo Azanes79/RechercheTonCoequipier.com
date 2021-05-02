@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     console.log('login init')
   }
 
+  // création du formulaire
   createForm() {
     this.authForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // message d'erreur du champ email
   getErrorMessageEmail() {
     if (this.authForm.get('email').hasError('required')) {
       return `l'email est obligatoire`;
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
     return this.authForm.get('email').hasError('email') ? `L'email n'est pas valide` : '';
   }
 
+  // message d'erreur du champ password
   getErrorMessagePwd() {
     if (this.authForm.get('pwd').hasError('required')) {
       return `le mot de passse est obligatoire`;
@@ -42,12 +45,13 @@ export class LoginComponent implements OnInit {
     return this.authForm.get('pwd').hasError('minlength') ? `Le mot de passe doit contenir 8 caractères minimum` : '';
   }
 
+  // vérifie si le formulaire est valide
+  // puis log l'utilisateur
   async login() {
     this.errorMessage = undefined;
     if(this.authForm.valid) {
       const result = await this.authService.SignIn(this.authForm.get('email').value, this.authForm.get('pwd').value);
       this.errorMessage = result;
-      
     }
   }
 }

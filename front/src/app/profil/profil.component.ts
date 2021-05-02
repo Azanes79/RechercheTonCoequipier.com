@@ -34,6 +34,7 @@ export class ProfilComponent implements OnInit {
     }, 500)
   }
 
+  // ouvre la fenêtre de dialogue permettant d'ajouter une preference
   openDialog(preferencesGame: PreferencesGames): void {
     const dialogRef = this.dialog.open(AddGameComponent, {
       width: '320px',

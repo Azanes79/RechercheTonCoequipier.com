@@ -38,7 +38,7 @@ export class AddGameComponent implements OnInit {
     // this.form.reset()
   }
 
-
+  // ajouter une préférence
   addPreference() {
     if (this.form.valid) {
       console.log('form valid')
@@ -61,7 +61,7 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-
+  // créer le formulaire
   createForm() {
     if(this.preferencesGame === null) {
       this.form = this.fb.group({
@@ -84,7 +84,7 @@ export class AddGameComponent implements OnInit {
     this.form.get('preferencesGames').setValue(this.preferencesGames);
   }
 
-
+  // Gestion du message d'erreur du champ gameId
   getErrorGame() {
     if (this.form.get('gameId').hasError('required')) {
       return `le champ est obligatoire`;
@@ -97,7 +97,7 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-
+  // Vérifie si le jeu est déjà saisie en préférence
   gameIsAlreadyExist(form: FormGroup) {
     const prefs = form.get('preferencesGames').value
     if (prefs && prefs !== null) {

@@ -48,6 +48,7 @@ export class MenuLeftComponent implements OnInit {
   }
 
 
+  // Gère les notifications 
   private subscribeToNotifications(): void {
     this.ioService.getNotification()
       .subscribe((data: { event: string, notif: Notifications }) => {
@@ -65,6 +66,7 @@ export class MenuLeftComponent implements OnInit {
       });
   }
 
+  // Gère les demandes d'ami
   private subscribeToFriends(): void {
     this.ioService.getFriend()
       .subscribe((data: { event: string, friend: User }) => {
@@ -84,6 +86,7 @@ export class MenuLeftComponent implements OnInit {
       });
   }
 
+  // Met à jour la notification pour dire qu'elle a été vue (au clic)
   isNotNew(notif: Notifications) {
     if (notif.isNewNotif) {
       notif.isNewNotif = false;
@@ -97,6 +100,7 @@ export class MenuLeftComponent implements OnInit {
     }
   }
 
+  // accepte la demande d'ami
   setAccepted(friend: Friend) {
     friend.state = 'accepted';
     this.authService.user.friends = this.friends;
@@ -116,6 +120,8 @@ export class MenuLeftComponent implements OnInit {
     })
   }
 
+
+  // refuse la demande d'ami
   setRefused(friend: Friend) {
     this.friends = this.friends.filter(_friend => _friend.user.FirebaseId !== friend.user.FirebaseId);
     this.authService.user.friends = this.friends;
@@ -123,10 +129,12 @@ export class MenuLeftComponent implements OnInit {
     });
   }
 
+  // envoie une notification à socketIo
   public broadcastFriend(user: User): void {
     this.ioService.sendAddFriend(user);
   }
 
+  // supprimer un ami
   deleteUser(friend:Friend) {
     this.setRefused(friend);
     this.userService.getUser(friend.user.FirebaseId).subscribe(_user => {

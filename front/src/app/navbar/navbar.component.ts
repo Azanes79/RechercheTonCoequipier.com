@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  // déconnecte l'utilisateur
   signOut() {
     this.authService.SignOut();
   }

@@ -18,14 +18,17 @@ export class PostService {
     return options;
   }
 
+  // récupère les publications
   getPosts() {
     return this.httpClient.get<Array<Post>>(`${environment.api}/posts/`, this.getOptions())
   }
 
+  // ajoute une publication
   postPosts(post: Post) {
     return this.httpClient.post<Post>(`${environment.api}/posts/`, post, this.getOptions())
   }
 
+  // met à jour une publication
   updatePosts(post: Post) {
     return this.httpClient.put<Post>(`${environment.api}/posts/`, post, this.getOptions())
   }
