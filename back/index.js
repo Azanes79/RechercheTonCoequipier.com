@@ -5,13 +5,9 @@ var createError = require('http-errors');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var indexRouter = require('./controllers/index');
 var usersRouter = require('./controllers/users');
 var postsRouter = require('./controllers/posts');
-var likesRouter = require('./controllers/likes');
-var sharesRouter = require('./controllers/shares');
-var friendsRouter = require('./controllers/friends');
-var gamesRouter = require('./controllers/games');
+var notificationsRouter = require('./controllers/notifications');
 var preferencesGamesRouter = require('./controllers/preferencesGames');
 var messagesRouter = require('./controllers/messages');
 
@@ -45,13 +41,9 @@ mongoose.connect(
 }).catch((err) => console.log('Error connecting database', err.message));
 
 // routing
-app.use('/', indexRouter);
-app.use('/friends', friendsRouter);
 app.use('/posts', postsRouter);
-app.use('/likes', likesRouter);
-app.use('/shares', sharesRouter);
 app.use('/users', usersRouter);
-app.use('/games', gamesRouter);
+app.use('/notifications', notificationsRouter);
 app.use('/messages', messagesRouter);
 app.use('/preferencesGames', preferencesGamesRouter);
 
@@ -61,7 +53,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(erAr, req, res, next) {
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -69,12 +61,14 @@ app.use(function(erAr, req, res, next) {
 });
 
 io.on('connection', (socket) => {
-  console.log('Demande de connection');
-
   socket.on('like', (post) => io.emit('like', post));
   socket.on('unlike', (post) => io.emit('unlike', post));
+  socket.on('share', (post) => io.emit('share', post));
+  socket.on('unShare', (post) => io.emit('unshare', post));
   socket.on('post', (post) => io.emit('post', post));
-  socket.on('post-delete', (post) => io.emit('post-delete', post));
+  socket.on('addFriend', (user) => io.emit('addFriend', user));
+  socket.on('acceptFriend', (user) => io.emit('acceptFriend', user));
+  socket.on('notifLikeAccept', (notif) => io.emit('notifLikeAccept', notif));
 });
 
 http.listen(process.env.IO_PORT, () => {

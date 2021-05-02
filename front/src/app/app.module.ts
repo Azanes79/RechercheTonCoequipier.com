@@ -8,13 +8,18 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { MaterialModule } from './_sared/material/material.module';
+import { MaterialModule } from './_shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './_sared/_services/auth.service';
+import { AuthService } from './_shared/_services/auth.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MenuLeftComponent } from './menu-left/menu-left.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    MenuLeftComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +30,8 @@ import { AuthService } from './_sared/_services/auth.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

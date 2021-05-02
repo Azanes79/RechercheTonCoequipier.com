@@ -25,8 +25,26 @@ router.get('/', async function (req, res) {
 /* create user */
 router.post('/', async function (req, res) {
   const user = new User(req.body)
-  const savedPost = user.save()
-  return res.status(201).json(savedPost);
+  const savedUser = user.save()
+  return res.status(201).json(savedUser);
+});
+
+/* update user */
+router.put('/', async function (req, res) {
+  if (req['currentUser']) {
+    const user = new User(req.body)
+    const status = 200;
+    const message = { message: 'ok' };
+    User.updateOne({ FirebaseId: req.body.FirebaseId }, user, function (err, docs) {
+      if (err) {
+        status = 400;
+        message = { message: 'Erreur à la mise à jour' };
+      }
+    });
+    return res.status(status).json(message);
+  } else {
+    res.status(403).json({ message: 'Inaccessible' });
+  }
 });
 
 

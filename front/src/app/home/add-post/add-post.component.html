@@ -5,16 +5,16 @@
         </mat-card-title>
 
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content [formGroup]="form">
         <mat-form-field appearance="outline" class="formfield-textarea">
             <mat-label>Votre recherche</mat-label>
-            <textarea matInput placeholder="Saisissez l'intitulé de votre recherche" rows="5"></textarea>
+            <textarea matInput placeholder="Saisissez l'intitulé de votre recherche" rows="5" formControlName="content"></textarea>
         </mat-form-field>
 
         <div>
             <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Jeu</mat-label>
-                <input matInput placeholder="League Of Legends" type="text" [matAutocomplete]="auto">
+                <input matInput placeholder="League Of Legends" type="text" [matAutocomplete]="auto" formControlName="gameId">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option value="League Of Legends"> League Of Legends </mat-option>
                     <mat-option value="Rocket League"> Rocket League </mat-option>
@@ -24,12 +24,12 @@
 
             <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Nb Joueurs</mat-label>
-                <input matInput type="number" placeholder="2">
+                <input matInput type="number" placeholder="2" formControlName="nbPlayers">
             </mat-form-field>
 
             <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Visibilité</mat-label>
-                <mat-select>
+                <mat-select formControlName="visibility">
                     <mat-option value="friends">Amis</mat-option>
                     <mat-option value="all">Tous</mat-option>
                 </mat-select>
@@ -38,6 +38,6 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary">Publier</button>
+        <button mat-raised-button color="primary" (click)="addPost()">Publier</button>
     </mat-card-actions>
 </mat-card>

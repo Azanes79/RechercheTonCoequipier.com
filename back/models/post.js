@@ -1,20 +1,13 @@
 const mongoose = require('mongoose');
-
 const postSchema = new mongoose.Schema({
+    user: Object,
     content: String,
     gameId: String,
-    nbPlayers: Int32Array,
+    nbPlayers: Number,
     visibility: String,
     datePost: Date,
-    dateEnd: Date
-})
-
-postSchema.set('toJSON', {
-    transform : (doc, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString();
-        delete returnedObject._id;
-        delete returnedObject._v;
-    }
+    likes: Array,
+    shares: Array
 })
 
 module.exports = mongoose.model('Post', postSchema);

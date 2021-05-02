@@ -1,0 +1,55 @@
+.container {
+    background-color: #393939;
+    height: 100%;
+}
+
+.search {
+    margin: 20px;
+    width: 100%;
+}
+
+.div-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell-friend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 20px;
+
+    .friend-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .friend-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+.new {
+    width: 10px;
+    border-radius: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+}
+
+.notif {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+}
+
+mat-icon {
+    color: var(--primary-color);
+}
+
+
+

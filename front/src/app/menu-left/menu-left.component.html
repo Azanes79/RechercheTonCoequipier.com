@@ -1,0 +1,57 @@
+<div class="container">
+    <mat-tab-group>
+        <mat-tab label="Amis">
+            <div class="div-search">
+                <mat-form-field class="search" appearance="outline">
+                    <mat-label>Rechercher</mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+            <div>
+                <div *ngFor="let friend of friends">
+                    <mat-divider></mat-divider>
+                    <div class="cell-friend">
+                        <div class="friend-info">
+                            <mat-icon>sentiment_very_satisfied</mat-icon>
+                            <p>{{friend.user.username}}</p>
+                        </div>
+
+                        <div class="friend-actions" *ngIf="friend.state !== 'waiting'">
+                            <mat-icon>chat</mat-icon>
+                            <mat-icon (click)="deleteUser(friend)">close</mat-icon>
+                        </div>
+
+                        <div class="friend-actions" *ngIf="friend.state === 'waiting'">
+                            <mat-icon style="color: green;" (click)="setAccepted(friend)">done</mat-icon>
+                            <mat-icon style="color: red;" (click)="setRefused(friend)">close</mat-icon>
+                        </div>
+
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Notifications">
+            <div>
+                <div *ngFor="let notif of notifications" (click)="isNotNew(notif)">
+                    <mat-divider></mat-divider>
+                    <div>
+                        <div class="notif">
+                            <div>
+                                {{notif.date | date: 'dd/MM/yyyy hh:mm'}}
+                            </div>
+                            <div class="new" *ngIf="notif.isNewNotif">
+
+                            </div>
+                        </div>
+                        <div class="friend-info">
+                            <p>{{notif.content}}</p>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

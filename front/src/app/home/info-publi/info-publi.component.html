@@ -1,23 +1,33 @@
 <h1 mat-dialog-title>Likes de la publication</h1>
 <div mat-dialog-content>
     <div *ngFor="let like of likes">
-        <mat-divider></mat-divider>
-        <div class="infos">
-            <p>{{like.username}}</p>
-            <div class="fab">
-                <button mat-mini-fab color="primary">
-                    <mat-icon>done</mat-icon>
-                </button>
-                <button mat-mini-fab color="warn">
-                    <mat-icon>close</mat-icon>
-                </button>
-                <button mat-mini-fab color="warn">
-                    <mat-icon>not_interested</mat-icon>
-                </button>
-                
+        <div *ngIf="!isUserLike(like)">
+            <mat-divider></mat-divider>
+            <div class="infos">
+                <p>{{like.user.username}}</p>
+                <div class="fab">
+                    <button mat-mini-fab *ngIf="like.state === 'waiting'" color="primary" (click)="accept(like)">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                    <button mat-mini-fab *ngIf="like.state === 'waiting'" color="warn" (click)="denie(like)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <div class="accept" *ngIf="like.state === 'accept'">
+                        <span>Accepté</span>
+                    </div>
+                    <div class="denie" *ngIf="like.state === 'denie'">
+                        <span>Refusé</span>
+                    </div>
+                    <button mat-mini-fab color="primary" (click)="addFriend(like)" *ngIf="!isAlreadyFriend(like)">
+                        <mat-icon>group_add</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="primary" *ngIf="isAlreadyFriend(like)" disabled>
+                        <mat-icon>group_add</mat-icon>
+                    </button>
+                </div>
             </div>
+            <mat-divider></mat-divider>
         </div>
-        <mat-divider></mat-divider>
     </div>
 </div>
 <div mat-dialog-actions>

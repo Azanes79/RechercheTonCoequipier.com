@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<app-navbar *ngIf="authService.isLoggedIn" (navOutput)="snav.toggle()" [newNotif]="newNotif"></app-navbar>
+<mat-sidenav-container class="example-sidenav-container" style="height: -webkit-fill-available;padding-bottom: 64px;">
+    <mat-sidenav #snav [mode]="'over'" style="width: 320px; padding-top: 64px;">
+        <app-menu-left *ngIf="authService.isLoggedIn" (newNotif)="setNewNotif($event)"></app-menu-left>
+    </mat-sidenav>
+    <mat-sidenav-content style="margin-top: 64px;">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

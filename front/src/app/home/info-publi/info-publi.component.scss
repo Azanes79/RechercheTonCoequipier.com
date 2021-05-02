@@ -16,3 +16,25 @@
 .mat-dialog-actions {
     justify-content: flex-end;
 }
+
+.accept {
+    border: 4px solid green;
+    border-radius: 5px;
+    padding: 5px 10px;
+
+    span {
+        color: green;
+        letter-spacing: 2px;
+    }
+}
+
+.denie {
+    border: 4px solid red;
+    border-radius: 5px;
+    padding: 5px 10px;
+
+    span {
+        color: red;
+        letter-spacing: 2px;
+    }
+}

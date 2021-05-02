@@ -3,21 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { MaterialModule } from '../_sared/material/material.module';
-import { MenuLeftComponent } from './menu-left/menu-left.component';
+import { MaterialModule } from '../_shared/material/material.module';
 import { FeedComponent } from './feed/feed.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { InfoPubliComponent } from './info-publi/info-publi.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [HomeComponent, NavbarComponent, MenuLeftComponent, FeedComponent, AddPostComponent, SuggestionsComponent, InfoPubliComponent],
+  declarations: [HomeComponent, FeedComponent, AddPostComponent, SuggestionsComponent, InfoPubliComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [InfoPubliComponent]
 })
