@@ -12,7 +12,7 @@
         </p>
     <!-- </mat-card> -->
     </div>
-    <div class="div-login">
+    <div class="div-login" [formGroup]="authForm">
         <mat-card class="card">
             <mat-card-header>
                 <mat-card-title>Inscris-toi !</mat-card-title>
@@ -20,20 +20,32 @@
             <mat-card-content>
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput type="email" placeholder="mail@mail.com">
+                    <input matInput type="email" formControlName="email" placeholder="mail@mail.com">
+                    <mat-error *ngIf="authForm.get('email').invalid">{{getErrorMessageEmail()}}</mat-error>
                 </mat-form-field>
+                
                 <mat-form-field appearance="outline">
                     <mat-label>Pseudo</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="pseudo">
+                    <mat-error *ngIf="authForm.get('pseudo').invalid">{{getErrorMessagePseudo()}}</mat-error>
                 </mat-form-field>
+                
                 <mat-form-field appearance="outline">
                     <mat-label>Mot de passe</mat-label>
-                    <input matInput type="password">
+                    <input matInput formControlName="pwd" type="password" pattern="(?=^.{10,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                    <mat-error *ngIf="authForm.get('pwd').invalid">{{getErrorMessagePwd()}}</mat-error>
                 </mat-form-field>
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirmation du mot de passe</mat-label>
+                    <input matInput formControlName="confirmPwd" type="password">
+                    <mat-error *ngIf="authForm.invalid">{{getErrorMessageConfirmPwd()}}</mat-error>
+                </mat-form-field>
+                
             </mat-card-content>
             <mat-card-actions>
                 <button mat-stroked-button [routerLink]="['/']" color="primary">Se connecter</button>
-                <button mat-raised-button [routerLink]="['/home']" color="primary">S'inscrire</button>
+                <button mat-raised-button color="primary" (click)="register()">S'inscrire</button>
             </mat-card-actions>
         </mat-card>
     </div>

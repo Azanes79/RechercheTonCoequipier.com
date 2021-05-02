@@ -57,8 +57,35 @@ p {
     }
 }
 
-@media(min-width: 1024px) {
-    .button-menu {
-        display: none;
+@media (min-width: 1280px) { 
+
+    .mat-toolbar {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
     }
+
+    .button-menu {
+        grid-column: 1/3;
+    }
+
+    .title {
+        grid-column: 4/9;
+        text-align: center;
+    }
+
+    .button-profil {
+        grid-column: 12;
+        width: 100%;
+    }
+
+}
+
+.new {
+    position: absolute;
+    width: 10px;
+    border-radius: 10px;
+    height: 10px;
+    background-color: var(--primary-color);
+    top: 0;
+    right: 0;
 }

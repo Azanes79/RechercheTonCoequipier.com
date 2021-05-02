@@ -1,51 +1,62 @@
-<app-navbar></app-navbar>
-
-<div class="container">
+<div class="container" *ngIf="authService.user">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title>Ton profil</mat-card-title>
-            
-        </mat-card-header>
+        <img src="../../assets/img/profil.png" width="200px" height="200px" />
         <mat-card-content>
             <div class="card-content">
-                <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Pseudo RTC.com</mat-label>
-                    <input matInput placeholder="Ton pseudo" type="text" minlength="2">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Description de ton profil</mat-label>
-                    <textarea matInput></textarea>
-                  </mat-form-field>
+                <p>{{authService.user.username}}</p>
+                <div >
+                    <p *ngIf="!isEdit" style="text-align: left;">Description :</p>
+                    <p *ngIf="!isEdit" style="text-align: justify;">
+                        {{authService.user.description}}
+                    </p>
+                    <mat-form-field appearance="outline" *ngIf="isEdit">
+                        <mat-label>Description de ton profil</mat-label>
+                        <textarea matInput [(ngModel)]="authService.user.description"></textarea>
+                    </mat-form-field>
+                </div>
+
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary">Sauvegarder</button>
+            <button mat-raised-button color="primary" *ngIf="isEdit" (click)="updateUser()">
+                <mat-icon>save</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" *ngIf="!isEdit" (click)="editUser()">
+                <mat-icon >edit</mat-icon>
+            </button>
         </mat-card-actions>
     </mat-card>
 
     <mat-card>
         <mat-card-header>
             <mat-card-title>Tes autres pseudos</mat-card-title>
-            <button mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+            <button mat-raised-button color="primary" (click)="openDialog(null)">
+                <mat-icon>add</mat-icon>
+            </button>
         </mat-card-header>
         <mat-card-content>
-            <div  *ngFor="let pseudoGame of pseudoGames">
+            <div *ngFor="let preferencesGame of preferencesGames">
                 <mat-divider></mat-divider>
                 <div class="content-pseudos">
                     <mat-form-field appearance="outline">
                         <mat-label>Jeu</mat-label>
-                        <input matInput type="text" value="{{pseudoGame.game}}" readonly>
+                        <input matInput type="text" value="{{preferencesGame.gameId}}" readonly>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Pseudo</mat-label>
-                        <input matInput type="text" value="{{pseudoGame.pseudo}}" readonly>
+                        <input matInput type="text" value="{{preferencesGame.username}}" readonly>
                     </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Niveau de jeu</mat-label>
+                        <input matInput type="text" value="{{preferencesGame.level}}" readonly>
+                    </mat-form-field>
+                </div>
+                <div class="actions">
+                    <button mat-raised-button color="primary" (click)="deleteGame(preferencesGame)"><mat-icon>delete</mat-icon></button>
+                    <button mat-raised-button color="primary" (click)="openDialog(preferencesGame)"><mat-icon>edit</mat-icon></button>
                 </div>
                 <mat-divider></mat-divider>
             </div>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="primary">Sauvegarder</button>
-        </mat-card-actions>
     </mat-card>
 </div>

@@ -4,35 +4,50 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import { User } from '../_models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  userData: any; // Save logged in user data
+  public userData: any; // Save logged in user data
+  public user: User ;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,  
+    public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private httpClient: HttpClient
-  ) {    
+  ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
+        console.log(this.userData)
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+        this.setUser(this.userData.uid)
       } else {
         localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+        this.user = null;
       }
     })
+  }
+
+
+  async setUser(firebaseId: string) {
+    const users = await this.httpClient.get<User[]>(`${environment.api}/users/${firebaseId}`, this.getOptions()).toPromise();
+    this.user = users[0];
+  }
+
+  private getOptions() {
+    const header = { ['authorization']: `Bearer ${this.getToken()}` }
+    const options = { headers: new HttpHeaders(header) };
+    return options;
   }
 
   postUser(user: User) {
@@ -41,23 +56,29 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
+    console.log(email, password);
     return this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['home']);
-        });
-        this.SetUserData(result.user);
+      .then(result => {
+        this.setData(result)
+        this.router.navigate(['home']);
       }).catch((error) => {
+        console.log(error)
         return error.message;
       })
   }
 
+  async setData(result) {
+    await this.SetUserData(result.user);
+    this.setUser(this.userData.uid);
+  }
+
   // Sign up with email/password
-  SignUp(email, password, username) {
+  async SignUp(email, password, username) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.postUser(new User(username, null, email, result.user.uid)).subscribe(_res => {})
-        this.router.navigate(['auth']);
+      .then(async result => {
+
+        this.postUser(new User(username, null, email, [], result.user.uid)).subscribe(_res => { })
+        this.router.navigate(['/']);
       }).catch((error) => {
         return error.message;
       })
@@ -72,15 +93,15 @@ export class AuthService {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
+  async SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: IUser = {
       FirebaseId: user.uid,
       email: user.email,
-      username: user.username,
-      description: user.description
+      photoURL: user.photoURL
     }
-    return userRef.set(userData, {
+
+    return await userRef.set(userData, {
       merge: true
     })
   }
@@ -89,7 +110,8 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['auth']);
+      this.user = undefined;
+      this.router.navigate(['/']);
     })
   }
 

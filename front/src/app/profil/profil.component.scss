@@ -1,6 +1,8 @@
 .mat-card {
     margin: 32px;
     width: 320px;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -32,4 +34,26 @@ mat-form-field {
 
 .content-pseudos {
     margin: 15px 0;
+}
+
+p {
+    text-align: center;
+}
+
+.card-content {
+    div {
+        margin-top: 10px;
+    }
+}
+
+img {
+    align-self: center;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
 }
